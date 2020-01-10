@@ -23,37 +23,40 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import AuthScreen from './AuthScreen';
+// import AuthScreen from './AuthScreen';
+// import LoginScreen from "./src/screens/LoginScreen";
+import AppNavigator from "./src";
 
 const App: () => React$Node = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>All is yours</Text>
-              <Text style={styles.sectionDescription}>
-                Project is set up now
-              </Text>
-              <Text style={styles.sectionDescription}>
-                Toggle Auth!
-              </Text>
-            </View>
-          </View>
-          <AuthScreen/>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <AppNavigator/>
+    // <>
+    //   <StatusBar barStyle="dark-content" />
+    //   <SafeAreaView>
+    //     <ScrollView
+    //       contentInsetAdjustmentBehavior="automatic"
+    //       style={styles.scrollView}>
+    //       <Header />
+    //       {global.HermesInternal == null ? null : (
+    //         <View style={styles.engine}>
+    //           <Text style={styles.footer}>Engine: Hermes</Text>
+    //         </View>
+    //       )}
+    //       <View style={styles.body}>
+    //         <View style={styles.sectionContainer}>
+    //           <Text style={styles.sectionTitle}>All is yours</Text>
+    //           <Text style={styles.sectionDescription}>
+    //             Project is set up now
+    //           </Text>
+    //           <Text style={styles.sectionDescription}>
+    //             Toggle Auth!
+    //           </Text>
+    //         </View>
+    //       </View>
+    //       <AuthScreen/>
+    //     </ScrollView>
+    //   </SafeAreaView>
+    // </>
   );
 };
 
