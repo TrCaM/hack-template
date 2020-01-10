@@ -7,13 +7,16 @@
  */
 
 import React from 'react';
+import { Root } from 'native-base';
 
 // import AuthScreen from './AuthScreen';
 import AppNavigator from "./src";
 
 const App = () => {
   return (
-    <AppNavigator/>
+    <Root>
+      <AppNavigator/>
+    </Root>
     // <>
     //   <StatusBar barStyle="dark-content" />
     //   <SafeAreaView>
