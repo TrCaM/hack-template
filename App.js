@@ -9,11 +9,11 @@
 import React from 'react';
 
 // import AuthScreen from './AuthScreen';
-import AppNavigator from "./src";
+import AppNavigator from './src';
 
 const App = () => {
   return (
-    <AppNavigator/>
+    <AppNavigator />
     // <>
     //   <StatusBar barStyle="dark-content" />
     //   <SafeAreaView>
