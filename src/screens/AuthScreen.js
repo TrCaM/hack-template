@@ -59,9 +59,9 @@ export default class AuthScreen extends React.Component {
   render() {
     return (
       <GoogleSigninButton
-          style={{ width: 192, height: 48 }}
+          style={{ width: 200, height: 48 }}
           size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Dark}
+          color={GoogleSigninButton.Color.Light}
           onPress={this.signIn}/>
     );
   }
