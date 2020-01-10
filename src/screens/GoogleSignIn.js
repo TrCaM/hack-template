@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, Alert } from 'react-native';
 
 import {
   GoogleSignin,
@@ -7,11 +7,22 @@ import {
   statusCodes,
 } from '@react-native-community/google-signin';
 
-export default class AuthScreen extends React.Component {
-  state = {};
+import { firebase } from '@react-native-firebase/auth';
+
+export default class GoogleSignIn extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.onSuccess = props.onSuccess;
+    this.onFailed = props.onFailed;
+  }
 
   componentDidMount() {
-    GoogleSignin.configure();
+    GoogleSignin.configure({
+        scopes: ['https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/contacts.readonly'],
+        webClientId: '887648564013-g4tq04ur65s209eab8g2ang3ijb1ktal.apps.googleusercontent.com', // required
+        offlineAccess: true,
+    });
   }
 
   // Somewhere in your code
@@ -19,18 +30,12 @@ export default class AuthScreen extends React.Component {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo);
+      const { idToken, accessToken } = await GoogleSignin.getTokens();
+      const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
+      const userData = await firebase.auth().signInWithCredential(credential);
+      this.onSuccess(userData);
     } catch (error) {
-      console.log(error);
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
-      } else {
-        // some other error happened
-      }
+      this.onFailed(error);
     }
   };
 

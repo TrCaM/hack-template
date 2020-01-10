@@ -5,9 +5,13 @@ import {
   StyleSheet } from 'react-native';
 
 import { Text, Button, Item, Input, Form, Toast } from 'native-base';
-import AuthScreen from './AuthScreen';
+import GoogleSignIn from './GoogleSignIn';
 
 import auth from '@react-native-firebase/auth';
+
+// TODO: disable buttons when email and password is empty/incorrect format
+// TODO: Spinner when it's loading
+// TODO: Our own icon for the app
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +36,8 @@ const styles = StyleSheet.create({
 const LoginScreen = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const goToHome = () => {
+  const goToHome = (userData) => {
+    console.log(userData);
     props.navigation.navigate('Home', {
       message: 'message from screen 1',
     });
@@ -51,24 +56,30 @@ const LoginScreen = props => {
         duration: 3000
       })
     } catch (e) {
-      Toast.show({
-        text: "Failed to create an account",
-        textStyle: { color: "red" },
-        buttonText: "close",
-        duration: 3000
-      })
+      onFailed(e);
     }
   };
 
-  const signIn = async (email, password) => {
+  const signIn = async () => {
     try {
-      await auth().signInWithEmailAndPassword(email, password);
+      Toast.show({
+        text: "Signing in...",
+      })
+      const userData =await auth().signInWithEmailAndPassword(email, password);
+      Toast.hide();
+      goToHome(userData);
     } catch (e) {
-      console.error(e.message);
+      onFailed(e);
     }
   };
 
-  // console.log(props.navigation.state.params);
+  const onFailed = (e) => Toast.show({
+      text: `Failed to log in: ${e.message}`,
+      textStyle: { color: "red" },
+      buttonText: "close",
+      duration: 3000
+  });
+
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require('../assets/Android.png')} />
@@ -79,13 +90,13 @@ const LoginScreen = props => {
         <Item last>
           <Input placeholder="Password" onChangeText={password => setPassword(password)}/>
         </Item>
-        <Button style={styles.button} dark onPress={goToHome}>
+        <Button style={styles.button} dark onPress={signIn}>
           <Text>Login</Text> 
         </Button>
         <Button style={styles.button} dark onPress={register}>
           <Text>Sign up</Text> 
         </Button>
-        <AuthScreen/>
+        <GoogleSignIn onSuccess={goToHome} onFailed={onFailed}/>
       </Form>
     </View>
   );
