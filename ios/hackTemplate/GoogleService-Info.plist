@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>887648564013-e45nm5qbtk66ook0lalqtfh81niakuiu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.887648564013-e45nm5qbtk66ook0lalqtfh81niakuiu</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>887648564013-3goqvgc8chh7a4jlq3hjv87ktd52h3q2.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAtfYZZMX52r3q7ox8IlHPtpdo5qFAssWM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>887648564013</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.hackTemplate</string>
+	<key>PROJECT_ID</key>
+	<string>crazy-template</string>
+	<key>STORAGE_BUCKET</key>
+	<string>crazy-template.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:887648564013:ios:06b0be51ccc185591519a4</string>
+	<key>DATABASE_URL</key>
+	<string>https://crazy-template.firebaseio.com</string>
+</dict>
+</plist>
