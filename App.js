@@ -44,6 +44,9 @@ const App: () => React$Node = () => {
               <Text style={styles.sectionDescription}>
                 Project is set up now
               </Text>
+              <Text style={styles.sectionDescription}>
+                Toggle Auth!
+              </Text>
             </View>
           </View>
         </ScrollView>

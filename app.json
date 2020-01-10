@@ -1,4 +1,18 @@
 {
   "name": "hackTemplate",
-  "displayName": "hackTemplate"
+  "displayName": "hackTemplate",
+  "expo": {
+    "ios": {
+      "bundleIdentifier": "com.hackTemplate",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.887648564013-e45nm5qbtk66ook0lalqtfh81niakuiu"
+        }
+      }
+    },
+    "android": {
+      "package": "com.hacktemplate",
+      "googleServicesFile": "./android/app/google-services.json"
+    }
+  }
 }
