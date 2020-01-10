@@ -1,11 +1,18 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import MemeList from '../../../src/components/MemeList';
+import { Container } from 'native-base';
 
 const FavoriteScreen = props => {
   return (
-    <View style={{padding: 100}}>
-      <Text>Favorite</Text>
-    </View>
+    <Container>    
+      <View style={{padding: 100}}>
+        <Text>Favorite</Text>
+      </View>
+      <MemeList>
+      </MemeList>
+    </Container>
+
   );
 };
 
