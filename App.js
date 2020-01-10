@@ -23,6 +23,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import AuthScreen from './AuthScreen';
 
 const App: () => React$Node = () => {
   return (
@@ -49,6 +50,7 @@ const App: () => React$Node = () => {
               </Text>
             </View>
           </View>
+          <AuthScreen/>
         </ScrollView>
       </SafeAreaView>
     </>

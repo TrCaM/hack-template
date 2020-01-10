@@ -1,52 +1,68 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { GoogleSignIn } from 'expo-google-sign-in';
+
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-community/google-signin';
 
 export default class AuthScreen extends React.Component {
-  state = { user: null };
+  state = {};
 
   componentDidMount() {
-    this.initAsync();
+    GoogleSignin.configure();
   }
 
-  initAsync = async () => {
-    await GoogleSignIn.initAsync({
-      clientId: '887648564013-e45nm5qbtk66ook0lalqtfh81niakuiu.apps.googleusercontent.com',
-    });
-    this._syncUserWithStateAsync();
-  };
-
-  _syncUserWithStateAsync = async () => {
-    const user = await GoogleSignIn.signInSilentlyAsync();
-    this.setState({ user });
-  };
-
-  signOutAsync = async () => {
-    await GoogleSignIn.signOutAsync();
-    this.setState({ user: null });
-  };
-
-  signInAsync = async () => {
+  // Somewhere in your code
+  signIn = async () => {
     try {
-      await GoogleSignIn.askForPlayServicesAsync();
-      const { type, user } = await GoogleSignIn.signInAsync();
-      if (type === 'success') {
-        this._syncUserWithStateAsync();
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log(userInfo);
+    } catch (error) {
+      console.log(error);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
       }
-    } catch ({ message }) {
-      alert('login: Error:' + message);
     }
   };
 
-  onPress = () => {
-    if (this.state.user) {
-      this.signOutAsync();
-    } else {
-      this.signInAsync();
-    }
-  };
+  // _syncUserWithStateAsync = async () => {
+  //   const user = await GoogleSignIn.signInSilentlyAsync();
+  //   this.setState({ user });
+  // };
+
+  // signOutAsync = async () => {
+  //   await GoogleSignIn.signOutAsync();
+  //   this.setState({ user: null });
+  // };
+
+  // signInAsync = async () => {
+  //   try {
+  //     await GoogleSignIn.askForPlayServicesAsync();
+  //     const { type, user } = await GoogleSignIn.signInAsync();
+  //     if (type === 'success') {
+  //       this._syncUserWithStateAsync();
+  //     }
+  //   } catch ({ message }) {
+  //     alert('login: Error:' + message);
+  //   }
+  // };
 
   render() {
-    return <Text onPress={this.onPress}>Toggle Auth</Text>;
+    return (
+      <GoogleSigninButton
+          style={{ width: 192, height: 48 }}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
+          onPress={this.signIn}/>
+    );
   }
 }
