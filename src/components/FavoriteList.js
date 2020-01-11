@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, Image, FlatList, List } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { Card, Icon, ListItem } from 'react-native-elements';
 import { Button, Container } from 'native-base';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import list from './Meme';
 
 
-export default class MemeList extends Component {
+export default class FavoriteList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            trending: []
+            favorite: []
         };
     }
 
@@ -23,25 +22,29 @@ export default class MemeList extends Component {
                 .collection('users')
                 .doc(this.user.uid)
                 .get();
-            if (!userFavorites.exists) {
-                await firestore().collection('users').doc(this.user.uid).set({ favorites: []});
-            }
-            const documentSnapshot = await firestore()
+            this.unsubcribe = await firestore()
                 .collection('users')
-                .doc('p6aGolLPtCeXjo7anQuM')
-                .get();
-            this.setState({ trending: documentSnapshot.data().favorites });
+                .doc(this.user.uid)
+                .onSnapshot((doc) => {
+                  this.setState({ favorite: doc.data().favorites });
+                });
+            this.setState({ favorite: userFavorites.data().favorites });
         } catch(e) {
             console.log(e.message);
         }
     }
 
-    async likeMeme(url) {
+  componentWillUnmount() {
+    this.unsubcribe();
+  }
+
+
+    async deleteMeme(url) {
         try {
             await firestore()
                 .collection('users')
                 .doc(this.user.uid)
-                .update({ favorites: firestore.FieldValue.arrayUnion(url)});
+                .update({ favorites: firestore.fieldvalue.arrayunion(url)});
         } catch(e) {
             console.log(e.message);
         }
@@ -51,15 +54,15 @@ export default class MemeList extends Component {
         return(
             <Container>
                     <FlatList 
-                        data={this.state.trending}
+                        data={this.state.favorite}
                         renderItem={({item}) => (
                             <Card
                                 image={{ uri: item }}
                                 imageStyle={{width: 200, height: 200}}
                                 containerStyle={{height: 267}}
                                 >
-                                <Button full danger onPress={() => this.likeMeme(item)}>
-                                    <Icon name='thumb-up' color='white'/>
+                                <Button full danger onPress={() => this.deleleMeme(item)}>
+                                    <Icon name='delete' color='white'/>
                                 </Button>
                             </Card>
                         )}

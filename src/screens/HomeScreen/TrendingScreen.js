@@ -1,5 +1,7 @@
 import React from 'react';
 import {Text, View, Button} from 'react-native';
+import { Container } from 'native-base';
+import MemeList from '../../../src/components/MemeList';
 
 const TrendingScreen = props => {
   const goToLogin = () => {
@@ -7,10 +9,10 @@ const TrendingScreen = props => {
   };
 
   return (
-    <View style={{padding: 100}}>
-      <Text>Trending</Text>
+    <Container>
       <Button title="go to Login" onPress={goToLogin} />
-    </View>
+      <MemeList />
+    </Container>
   );
 };
 
