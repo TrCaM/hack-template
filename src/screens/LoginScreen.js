@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { 
+import {
   View,
   Image,
   StyleSheet } from 'react-native';
 
-import { Text, Button, Item, Input, Form, Toast } from 'native-base';
+import {Text, Button, Item, Input, Form, Toast} from 'native-base';
 import GoogleSignIn from './GoogleSignIn';
 
 import auth from '@react-native-firebase/auth';
@@ -16,27 +16,27 @@ import auth from '@react-native-firebase/auth';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
     flex: 2,
-    resizeMode: "contain"
+    resizeMode: 'contain',
   },
   loginForm: {
     flex: 2,
     width: 200,
-    justifyContent: "space-between"
+    justifyContent: 'space-between',
   },
   button: {
-    justifyContent: "center",
-  }
+    justifyContent: 'center',
+  },
 });
 
 const LoginScreen = props => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const goToHome = (userData) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const goToHome = userData => {
     console.log(userData);
     props.navigation.navigate('Home', {
       message: 'message from screen 1',
@@ -46,15 +46,15 @@ const LoginScreen = props => {
   const register = async () => {
     try {
       Toast.show({
-        text: "Signing up...",
-      })
+        text: 'Signing up...',
+      });;
       await auth().createUserWithEmailAndPassword(email, password);
       Toast.show({
-        text: "Your account was created",
-        textStyle: { color: "green" },
-        buttonText: "close",
-        duration: 3000
-      })
+        text: 'Your account was created',
+        textStyle: {color: 'green'},
+        buttonText: 'close',
+        duration: 3000,
+      });;
     } catch (e) {
       console.log(e);
       onFailed(e);
@@ -64,9 +64,9 @@ const LoginScreen = props => {
   const signIn = async () => {
     try {
       Toast.show({
-        text: "Signing in...",
-      })
-      const userData =await auth().signInWithEmailAndPassword(email, password);
+        text: 'Signing in...',
+      });;
+      const userData =  await auth().signInWithEmailAndPassword(email, password);
       Toast.hide();
       goToHome(userData);
     } catch (e) {
@@ -74,30 +74,35 @@ const LoginScreen = props => {
     }
   };
 
-  const onFailed = (e) => Toast.show({
+  const onFailed = e =>
+    Toast.show({
       text: `Failed to log in: ${e.message}`,
-      textStyle: { color: "red" },
-      buttonText: "close",
-      duration: 3000
-  });
+      textStyle: {color: 'red'},
+      buttonText: 'close',
+      duration: 3000,
+    });
 
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require('../assets/Android.png')} />
       <Form style={styles.loginForm}>
         <Item>
-          <Input placeholder="Email" onChangeText={email => setEmail(email)}/>
+          <Input placeholder="Email" onChangeText={email => setEmail(email)} />
         </Item>
         <Item last>
-          <Input secureTextEntry={true} placeholder="Password" onChangeText={password => setPassword(password)}/>
+          <Input
+            secureTextEntry={true}
+            placeholder="Password"
+            onChangeText={password => setPassword(password)}
+          />
         </Item>
         <Button style={styles.button} dark onPress={signIn}>
-          <Text>Login</Text> 
+          <Text>Login</Text>
         </Button>
         <Button style={styles.button} dark onPress={register}>
-          <Text>Sign up</Text> 
+          <Text>Sign up</Text>
         </Button>
-        <GoogleSignIn onSuccess={goToHome} onFailed={onFailed}/>
+        <GoogleSignIn onSuccess={goToHome} onFailed={onFailed} />
       </Form>
     </View>
   );

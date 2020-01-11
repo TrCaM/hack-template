@@ -3,12 +3,14 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import TrendingScreen from './TrendingScreen';
 import FavoriteScreen from './FavoriteScreen';
 import ProfileScreen from './ProfileScreen';
+// import PlayScreen from './PlayScreen';
 
 const TabNavigator = createBottomTabNavigator(
   {
     Trending: TrendingScreen,
     Favorite: FavoriteScreen,
-    Profile: ProfileScreen,
+    Camera: ProfileScreen,
+    // Start: PlayScreen,
   },
   {
     tabBarOptions: {

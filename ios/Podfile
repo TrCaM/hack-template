@@ -34,6 +34,7 @@ target 'hackTemplate' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app' 
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: ['FaceDetectorMLKit']
 
   # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'

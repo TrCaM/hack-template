@@ -4,7 +4,7 @@ import LoginScreen from './screens/LoginScreen';
 import HomeNavigator from './screens/HomeScreen/HomeNavigator';
 
 const MainNavigator = createSwitchNavigator({
-  Login: {screen: LoginScreen},
+  // Login: {screen: LoginScreen},
   Home: {screen: HomeNavigator},
 });
 
