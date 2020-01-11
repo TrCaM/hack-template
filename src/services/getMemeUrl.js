@@ -25,12 +25,10 @@ const memeUrl = async () => {
 
 const memeList = async () => {
   const promises = [];
-  for (let i=0; i<50; i++){
+  for (let i = 0; i < 100; i++) {
     promises.push(memeUrl());
   }
   return Promise.all(promises);
 };
-
-
 
 export default memeList;

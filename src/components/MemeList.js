@@ -1,19 +1,10 @@
 import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Image,
-  FlatList,
-  List,
-} from 'react-native';
-import {Card, Icon, ListItem} from 'react-native-elements';
+import {StyleSheet, FlatList} from 'react-native';
+import {Card, Icon} from 'react-native-elements';
 import {Button, Container} from 'native-base';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import list from './Meme';
 import getMemeList from '../services/getMemeUrl';
-import memeList from '../services/getMemeUrl';
 
 export default class MemeList extends Component {
   constructor(props) {
@@ -38,7 +29,7 @@ export default class MemeList extends Component {
           .set({favorites: []});
       }
       const memeList = await getMemeList();
-      this.setState({trending: memeList});
+      this.setState({trending: [...new Set(memeList)]});
     } catch (e) {
       console.log(e.message);
     }
@@ -62,7 +53,7 @@ export default class MemeList extends Component {
           style={{flexGrow: 1}}
           data={this.state.trending}
           renderItem={({item}) => (
-            <Card image={{uri: item}} imageStyle={{width: 200}}>
+            <Card image={{uri: item}} imageStyle={{width: 200, height: 350}}>
               <Button full danger onPress={() => this.likeMeme(item)}>
                 <Icon name="thumb-up" color="white" />
               </Button>
