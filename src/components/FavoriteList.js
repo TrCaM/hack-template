@@ -44,7 +44,7 @@ export default class FavoriteList extends Component {
             await firestore()
                 .collection('users')
                 .doc(this.user.uid)
-                .update({ favorites: firestore.fieldvalue.arrayunion(url)});
+                .update({ favorites: firestore.FieldValue.arrayRemove(url)});
         } catch(e) {
             console.log(e.message);
         }
@@ -61,7 +61,7 @@ export default class FavoriteList extends Component {
                                 imageStyle={{width: 200, height: 200}}
                                 containerStyle={{height: 267}}
                                 >
-                                <Button full danger onPress={() => this.deleleMeme(item)}>
+                                <Button full danger onPress={() => this.deleteMeme(item)}>
                                     <Icon name='delete' color='white'/>
                                 </Button>
                             </Card>
