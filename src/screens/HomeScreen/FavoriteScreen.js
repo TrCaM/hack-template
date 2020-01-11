@@ -2,15 +2,12 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import MemeList from '../../../src/components/MemeList';
 import { Container } from 'native-base';
+import FavoriteList from '../../components/FavoriteList';
 
 const FavoriteScreen = props => {
   return (
     <Container>    
-      <View style={{padding: 100}}>
-        <Text>Favorite</Text>
-      </View>
-      <MemeList>
-      </MemeList>
+      <FavoriteList />
     </Container>
 
   );
