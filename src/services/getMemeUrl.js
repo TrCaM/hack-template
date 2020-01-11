@@ -23,4 +23,14 @@ const memeUrl = async () => {
   return url;
 };
 
-export default memeUrl;
+const memeList = async () => {
+  const promises = [];
+  for (let i=0; i<50; i++){
+    promises.push(memeUrl());
+  }
+  return Promise.all(promises);
+};
+
+
+
+export default memeList;
