@@ -56,6 +56,7 @@ const LoginScreen = props => {
         duration: 3000
       })
     } catch (e) {
+      console.log(e);
       onFailed(e);
     }
   };
@@ -88,7 +89,7 @@ const LoginScreen = props => {
           <Input placeholder="Email" onChangeText={email => setEmail(email)}/>
         </Item>
         <Item last>
-          <Input placeholder="Password" onChangeText={password => setPassword(password)}/>
+          <Input secureTextEntry={true} placeholder="Password" onChangeText={password => setPassword(password)}/>
         </Item>
         <Button style={styles.button} dark onPress={signIn}>
           <Text>Login</Text> 
